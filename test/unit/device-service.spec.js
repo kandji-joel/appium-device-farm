@@ -75,14 +75,14 @@ describe('Get device', () => {
       name: '',
       busy: false,
       offline: false,
-      minSDK: 10.8,
+      minSDK: "10.8",
     };
     const device = getDevice(filterOptions);
     expect(parseFloat(device.sdk)).to.be.gte(10.8);
   });
 
   it('Get ios simulator based on filter with minSDK', () => {
-    const filterOptions = { platform: 'ios', name: '', busy: false, offline: false, minSDK: 14.1 };
+    const filterOptions = { platform: 'ios', name: '', busy: false, offline: false, minSDK: "14.1" };
     const device = getDevice(filterOptions);
     expect(parseFloat(device.sdk)).to.be.gte(14.1);
   });
@@ -94,14 +94,14 @@ describe('Get device', () => {
       name: '',
       busy: false,
       offline: false,
-      maxSDK: 10.8,
+      maxSDK: "10.8",
     };
     const device = getDevice(filterOptions);
     expect(parseFloat(device.sdk)).to.be.lte(10.8);
   });
 
   it('Get ios simulator based on filter with maxSDK', () => {
-    const filterOptions = { platform: 'ios', name: '', busy: false, offline: false, maxSDK: 14.1 };
+    const filterOptions = { platform: 'ios', name: '', busy: false, offline: false, maxSDK: "14.1" };
     const device = getDevice(filterOptions);
     expect(parseFloat(device.sdk)).to.be.lte(14.1);
   });
@@ -112,15 +112,15 @@ describe('Get device', () => {
       name: '',
       busy: false,
       offline: false,
-      minSDK: 10,
-      maxSDK: 10.8,
+      minSDK: "10",
+      maxSDK: "10.8",
     };
     const device = getDevice(filterOptions);
     expect(parseFloat(device.sdk)).to.be.eq(10);
   });
 
   it('Get ios simulator based on filter with both minSDK and maxSDK', () => {
-    const filterOptions = { platform: 'ios', name: '', busy: false, offline: false, minSDK: 14.0, maxSDK: 14.1 };
+    const filterOptions = { platform: 'ios', name: '', busy: false, offline: false, minSDK: "14.0", maxSDK: "14.1" };
     const device = getDevice(filterOptions);
     expect(parseFloat(device.sdk)).to.be.eq(14.0);
   });

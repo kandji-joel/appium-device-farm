@@ -62,7 +62,22 @@ export function getAllDevices(): Array<IDevice> {
   return DeviceModel.chain().find().data();
 }
 
+
 export function getDevice(filterOptions: IDeviceFilterOptions): IDevice {
+  const semver = require('semver')
+  const devices = DeviceModel.where(function(device) {
+    return (
+      device.platform === filterOptions.platform 
+      && device.name.includes(filterOptions.name || '')
+      && device.busy === filterOptions.busy
+      && filterOptions.udid === undefined ? true :
+      );
+  });
+  return devices[0]
+}
+
+
+export function getDeviceOG(filterOptions: IDeviceFilterOptions): IDevice {
   const filter = {
     platform: filterOptions.platform,
     name: { $contains: filterOptions.name || '' },
@@ -73,18 +88,8 @@ export function getDevice(filterOptions: IDeviceFilterOptions): IDevice {
     filter.udid = { $in: filterOptions.udid };
   }
 
-  if (filterOptions.minSDK && filterOptions.minSDK) {
-    filter.sdk = { 
-      $gte: filterOptions.minSDK,
-      $lte: filterOptions.maxSDK 
-    };
-  } else {
-    if (filterOptions.minSDK) {
-      filter.sdk = { $gte: filterOptions.minSDK };
-    }
-    if (filterOptions.maxSDK) {
-      filter.sdk = { $lte: filterOptions.maxSDK };
-    }
+  if (filterOptions.minSDK) {
+    filter.sdk = { $gte: filterOptions.minSDK };
   }
 
   if (filterOptions.deviceType === 'simulator') {

@@ -19,6 +19,7 @@ describe('Device filter tests', () => {
       deviceType: 'real',
       udid: undefined,
       minSDK: undefined,
+      maxSDK: undefined,
       busy: false,
     });
   });
@@ -40,17 +41,19 @@ describe('Device filter tests', () => {
       deviceType: 'simulator',
       udid: undefined,
       minSDK: undefined,
+      maxSDK: undefined,
       busy: false,
     });
   });
 
-  it('Get Device filter properties with minSDK', () => {
+  it('Get Device filter properties with both minSDK and maxSDK', () => {
     const capabilities = {
       alwaysMatch: {
         platformName: 'iOS',
         'appium:app': '/Downloads/VodQA.app',
         'appium:iPhoneOnly': true,
         'appium:minSDK': 10.2,
+        'appium:maxSDK': 10.2,
       },
       firstMatch: [{}],
     };
@@ -62,6 +65,7 @@ describe('Device filter tests', () => {
       deviceType: 'simulator',
       udid: undefined,
       minSDK: 10.2,
+      maxSDK: 10.2,
       busy: false,
     });
   });

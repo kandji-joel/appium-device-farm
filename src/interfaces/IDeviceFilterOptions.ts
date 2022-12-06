@@ -9,4 +9,5 @@ export interface IDeviceFilterOptions {
   udid?: any[];
   deviceType?: DeviceType;
   minSDK: number;
+  maxSDK: number;
 }

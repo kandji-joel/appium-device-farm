@@ -73,8 +73,18 @@ export function getDevice(filterOptions: IDeviceFilterOptions): IDevice {
     filter.udid = { $in: filterOptions.udid };
   }
 
-  if (filterOptions.minSDK) {
-    filter.sdk = { $gte: filterOptions.minSDK };
+  if (filterOptions.minSDK && filterOptions.minSDK) {
+    filter.sdk = { 
+      $gte: filterOptions.minSDK,
+      $lte: filterOptions.maxSDK 
+    };
+  } else {
+    if (filterOptions.minSDK) {
+      filter.sdk = { $gte: filterOptions.minSDK };
+    }
+    if (filterOptions.maxSDK) {
+      filter.sdk = { $lte: filterOptions.maxSDK };
+    }
   }
 
   if (filterOptions.deviceType === 'simulator') {
